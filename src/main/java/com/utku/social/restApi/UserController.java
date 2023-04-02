@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utku.social.Business.UserManager;
-import com.utku.social.DataAccess.IUserRepository;
 import com.utku.social.Entities.User;
 
 @RestController
