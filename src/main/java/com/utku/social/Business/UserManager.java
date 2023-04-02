@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.utku.social.DataAccess.IUserRepository;
 import com.utku.social.Entities.User;
 
+@Service
 public class UserManager {
 
 	private IUserRepository userRepo;
@@ -29,7 +31,7 @@ public class UserManager {
 	}
 	
 	@Transactional
-	public User getUserById(long id) {
+	public User getUserById(Long id) {
 		return userRepo.findById(id).orElse(null);
 	}
 	

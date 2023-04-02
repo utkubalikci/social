@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utku.social.Business.UserManager;
+import com.utku.social.DataAccess.IUserRepository;
 import com.utku.social.Entities.User;
 
 @RestController
@@ -20,13 +21,15 @@ import com.utku.social.Entities.User;
 public class UserController {
 
 	private UserManager userManager;
+	private IUserRepository userRepo;
 
 	@Autowired
-	public UserController(UserManager userManager) {
+	public UserController(UserManager userManager,IUserRepository userRepo) {
 		this.userManager = userManager;
+		this.userRepo = userRepo;
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<User> getAll(){
 		return userManager.getAll();
 	}
@@ -37,17 +40,18 @@ public class UserController {
 	}
 	
 	@GetMapping("/{userId}")
-	public User getUserById(@PathVariable long id) {
-		return userManager.getUserById(id);
+	public User getUserById(@PathVariable Long userId) {
+		//return userRepo.findById(id).orElse(null);
+		return userManager.getUserById(userId);
 	}
 	
 	@PutMapping("/{userId}")
-	public void update(@PathVariable long id, @RequestBody User newUser) {
-		userManager.updateUserById(id, newUser);
+	public void update(@PathVariable long userId, @RequestBody User newUser) {
+		userManager.updateUserById(userId, newUser);
 	}
 	
 	@DeleteMapping("/{userId}")
-	public void delete(@PathVariable long id) {
-		userManager.deleteUserById(id);
+	public void delete(@PathVariable long userId) {
+		userManager.deleteUserById(userId);
 	}
 }
