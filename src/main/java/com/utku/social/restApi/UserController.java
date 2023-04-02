@@ -21,12 +21,10 @@ import com.utku.social.Entities.User;
 public class UserController {
 
 	private UserManager userManager;
-	private IUserRepository userRepo;
 
 	@Autowired
-	public UserController(UserManager userManager,IUserRepository userRepo) {
+	public UserController(UserManager userManager) {
 		this.userManager = userManager;
-		this.userRepo = userRepo;
 	}
 	
 	@GetMapping("/")
@@ -41,7 +39,6 @@ public class UserController {
 	
 	@GetMapping("/{userId}")
 	public User getUserById(@PathVariable Long userId) {
-		//return userRepo.findById(id).orElse(null);
 		return userManager.getUserById(userId);
 	}
 	
