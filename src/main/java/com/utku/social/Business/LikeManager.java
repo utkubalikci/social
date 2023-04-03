@@ -3,12 +3,15 @@ package com.utku.social.Business;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.utku.social.DataAccess.ILikeRepository;
 import com.utku.social.Entities.Like;
 import com.utku.social.Entities.Post;
 import com.utku.social.Entities.User;
 import com.utku.social.requests.LikeCreateRequest;
 
+@Service
 public class LikeManager {
 
 	private ILikeRepository likeRepo;
