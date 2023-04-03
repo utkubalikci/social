@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import com.utku.social.DataAccess.ILikeRepository;
 import com.utku.social.Entities.Like;
+import com.utku.social.Entities.Post;
+import com.utku.social.Entities.User;
 import com.utku.social.requests.LikeCreateRequest;
 
 public class LikeManager {
@@ -32,12 +34,19 @@ public class LikeManager {
 	}
 
 	public Like addLike(LikeCreateRequest newLike) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userManager.getUserById(newLike.getUser_id());
+		Post post = postManager.getPostById(newLike.getPost_id());
+		if (user == null || post == null)
+			return null;
+		Like like = new Like();
+		like.setId(newLike.getId());
+		like.setPost(post);
+		like.setUser(user);
+		return likeRepo.save(like);
 	}
 
 	public void deleteLikeById(Long commentId) {
-		// TODO Auto-generated method stub
+		likeRepo.deleteById(commentId);
 		
 	}
 
