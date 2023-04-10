@@ -2,6 +2,7 @@ package com.utku.social.Business;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import com.utku.social.Entities.Post;
 import com.utku.social.Entities.User;
 import com.utku.social.requests.PostCreateRequest;
 import com.utku.social.requests.PostUpdateRequest;
+import com.utku.social.responses.PostResponse;
 
 @Service
 public class PostManager {
@@ -24,10 +26,13 @@ public class PostManager {
 		this.userManager = userManager;
 	}
 
-	public List<Post> getAllPosts(Optional<Long> userId) {
+	public List<PostResponse> getAllPosts(Optional<Long> userId) {
+		List<Post> list;
 		if (userId.isPresent())
-			return postRepo.findByUserId(userId.get());
-		return postRepo.findAll();
+			list = postRepo.findByUserId(userId.get());
+		else
+			list = postRepo.findAll();
+		return list.stream().map(p -> new PostResponse(p)).collect(Collectors.toList());
 	}
 
 	public Post getPostById(Long postId) {

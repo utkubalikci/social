@@ -17,6 +17,7 @@ import com.utku.social.Business.PostManager;
 import com.utku.social.Entities.Post;
 import com.utku.social.requests.PostCreateRequest;
 import com.utku.social.requests.PostUpdateRequest;
+import com.utku.social.responses.PostResponse;
 
 @RestController
 @RequestMapping("/posts")
@@ -29,7 +30,7 @@ public class PostController {
 	}
 	
 	@GetMapping
-	public List<Post> getAllPosts(@RequestParam Optional<Long> userId){
+	public List<PostResponse> getAllPosts(@RequestParam Optional<Long> userId){
 		return postManager.getAllPosts(userId);
 	}
 	
